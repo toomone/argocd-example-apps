@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: gcr.io/heptio-images/ks-guestbook-demo
+    argocd-image-updater.argoproj.io/write-back-method: argocd
+    argocd-image-updater.argoproj.io/git-branch: HEAD
+  name: imageupdater-guestbook
+  namespace: argocd
+spec:
+  destination:
+    namespace: guestbook-demo
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: imageupdater-guestbook
+    repoURL: https://github.com/toomone/argocd-example-apps
+    targetRevision: HEAD
