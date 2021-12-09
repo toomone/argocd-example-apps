@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata: 
+  name: acrsecret
+type: Opaque
+stringData:
+  secret-key: acrforctooffice:t4CuTeH6IQ9M83meJNHYYl3eXyus4Q=K

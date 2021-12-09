@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: acrforctooffice.azurecr.io/ks-guestbook-demo
+  repository: acrpublicforctooffice.azurecr.io/ks-guestbook-demo
   tag: 0.1
   pullPolicy: IfNotPresent
 
