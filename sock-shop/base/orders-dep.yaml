@@ -49,10 +49,6 @@ spec:
            value: zipkin.jaeger.svc.cluster.local
          - name: JAVA_OPTS
            value: -Xms64m -Xmx128m -XX:PermSize=32m -XX:MaxPermSize=64m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom
-         - name: DD_PROFILING_ENABLED
-           value: "true"
-         - name: DD_LOGS_INJECTION
-           value: "true"
         resources:
           limits:
             cpu: 500m
