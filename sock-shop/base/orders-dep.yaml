@@ -5,6 +5,9 @@ metadata:
   name: orders
   labels:
     name: orders
+    tags.datadoghq.com/env: "demo"
+    tags.datadoghq.com/service: "orders"
+    tags.datadoghq.com/version: "0.1"    
 spec:
   replicas: 1
   selector:
@@ -14,15 +17,42 @@ spec:
     metadata:
       labels:
         name: orders
+        tags.datadoghq.com/env: "demo"
+        tags.datadoghq.com/service: "orders"
+        tags.datadoghq.com/version: "0.1"  
     spec:
       containers:
       - name: orders
         image: weaveworksdemos/orders:0.4.7
         env:
+         - name: DD_AGENT_HOST
+           valueFrom:
+             fieldRef:
+               fieldPath: status.hostIP
+         - name: DD_ENV
+           valueFrom:
+             fieldRef:
+               fieldPath: metadata.labels['tags.datadoghq.com/env']
+         - name: DD_SERVICE
+           valueFrom:
+             fieldRef:
+               fieldPath: metadata.labels['tags.datadoghq.com/service']
+         - name: DD_VERSION
+           valueFrom:
+             fieldRef:
+               fieldPath: metadata.labels['tags.datadoghq.com/version']
+         - name: DD_PROFILING_ENABLED
+           value: "true"
+         - name: DD_LOGS_INJECTION
+           value: "true"        
          - name: ZIPKIN
            value: zipkin.jaeger.svc.cluster.local
          - name: JAVA_OPTS
            value: -Xms64m -Xmx128m -XX:PermSize=32m -XX:MaxPermSize=64m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom
+         - name: DD_PROFILING_ENABLED
+           value: "true"
+         - name: DD_LOGS_INJECTION
+           value: "true"
         resources:
           limits:
             cpu: 500m
