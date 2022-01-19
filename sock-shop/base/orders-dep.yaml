@@ -9,7 +9,7 @@ metadata:
     tags.datadoghq.com/service: "orders"
     tags.datadoghq.com/version: "0.1"    
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       name: orders
